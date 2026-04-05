@@ -1,0 +1,39 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and group by oscillator_id.",
+                "Extract ground truth physical parameters (m, b, omega, A, phi, zeta) and observed time-series data.",
+                "Implement a vectorized function to compute the theoretical energy E_model(t; m_tilde, b_tilde) based on the analytical solution for damped harmonic oscillators.",
+                "Calculate the baseline residual at true parameters to establish a \"noise floor\" for each oscillator.",
+                "Perform a sanity check by comparing the theoretical energy at ground truth parameters against the provided total_energy field to ensure physical consistency.",
+                "Save the processed parameters, baseline residuals, and validation metrics to a file for subsequent steps."
+            ],
+            "sub_task": "Data preprocessing, baseline extraction, and theoretical model validation.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Generate a 10x10 grid of perturbed parameters (m_tilde, b_tilde) within +/- 10% of the ground truth for each oscillator.",
+                "Compute the 4D array of relative energy residuals Delta E_rel across the parameter grid.",
+                "Estimate sensitivity gradients nabla_(m_tilde, b_tilde) Delta E_rel using a central difference scheme.",
+                "Compute the rank correlation between the gradient magnitudes and the damping_ratio.",
+                "Generate 2D heatmaps of the energy residual manifold for the oscillators with the lowest and highest damping ratios.",
+                "Save all calculated metrics and plots."
+            ],
+            "sub_task": "Parameter perturbation, sensitivity manifold calculation, and correlation analysis.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity gradients and the correlation analysis to assess the robustness of the energy dissipation model.",
+                "Compare the observed \"noise floor\" (from Step 1) against the magnitude of residuals induced by the +/- 10% parameter perturbations to establish a quantitative threshold where parameter uncertainty dominates measurement noise.",
+                "Discuss the non-linearities observed in the energy residual manifolds and their relationship with damping regimes.",
+                "Synthesize the findings into a comprehensive Results section, referencing the generated plots and statistical summaries.",
+                "Provide a final assessment on how physical parameter precision impacts long-term state prediction in underdamped systems."
+            ],
+            "sub_task": "Synthesis of results and final reporting.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
