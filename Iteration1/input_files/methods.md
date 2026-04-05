@@ -1,0 +1,13 @@
+1. **Dynamic Noise Floor Characterization**: Calculate the standard deviation of the observed `total_energy` residuals relative to the ground truth model for each oscillator. To account for the signal-to-noise ratio decay, compute the noise floor $\sigma_{noise}(t)$ using a rolling window standard deviation across the time domain $[0, 20s]$. This time-resolved threshold will serve as the reference for determining model divergence.
+
+2. **Analytical Jacobian Derivation**: Derive the analytical partial derivatives of the theoretical energy function $E_{model}(t; m, b) = \frac{1}{2} m v(t)^2 + \frac{1}{2} (m \omega^2) x(t)^2$ with respect to $m$ and $b$. Apply the chain rule to account for the implicit dependence of $k$ on $m$ ($k = m \omega^2$). Express these as the Jacobian vector $\mathbf{J}(t) = [\frac{\partial E}{\partial m}, \frac{\partial E}{\partial b}]^T$ and implement as a vectorized function.
+
+3. **Time-to-Divergence ($T_d$) Computation**: For each oscillator, define the predictive horizon $T_d$ as the first time index $t$ where the absolute difference between the ground truth energy and the energy predicted by a perturbed parameter set $(\tilde{m} = m(1+\delta_m), \tilde{b} = b(1+\delta_b))$ exceeds $\sigma_{noise}(t)$. Use a binary search over the time array to identify $T_d$ for a range of perturbations $\delta_m, \delta_b \in [-0.1, 0.1]$.
+
+4. **Tolerance Budget Mapping and Verification**: Define the "Sensitivity Ellipse" in the $(\Delta m, \Delta b)$ parameter space such that the first-order Taylor expansion $\Delta E \approx \nabla E \cdot [\Delta m, \Delta b]^T$ equals the noise floor $\sigma_{noise}(t)$ at $T=20s$. After calculating the theoretical bounds $\Delta m_{max}$ and $\Delta b_{max}$ for each oscillator, perform a forward simulation check to verify that the resulting residual remains within $\sigma_{noise}(t)$ for the entire duration.
+
+5. **Sensitivity Horizon Analysis**: Correlate the computed $T_d$ and the Tolerance Budget with the `damping_ratio` ($\zeta$) of each oscillator. Use linear regression to quantify the relationship between the damping regime and the rate of predictive horizon decay.
+
+6. **Predictive Horizon Visualization**: Generate a scatter plot of $T_d$ versus $\zeta$ for the population of 20 oscillators. Overlay the theoretical sensitivity curves derived from the Jacobian to demonstrate the alignment between the analytical model and the observed data.
+
+7. **Statistical Aggregation**: Calculate the mean and standard deviation of the Tolerance Budgets across the population, grouped by low, medium, and high damping regimes. Summarize these findings to provide a clear guideline for the precision required in physical parameter estimation for underdamped systems.
