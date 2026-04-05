@@ -1,0 +1,39 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and compute the theoretical energy $E_{model}(t)$ for all oscillators.",
+                "Apply a Savitzky-Golay filter to the observed energy signals to reduce noise while preserving the decay envelope.",
+                "Compute the residual $\\epsilon(t) = |E_{obs}(t) - E_{model}(t)|$ and perform a sanity check against the estimated noise variance $\\eta$ to ensure sufficient signal-to-noise ratio.",
+                "Compute the analytical Jacobian $\\mathbf{J}(t) = [\\frac{\\partial E}{\\partial m}, \\frac{\\partial E}{\\partial b}]^T$ and the time-dependent Sensitivity Index $S(t) = \\|\\mathbf{J}(t)\\|_2$.",
+                "Calculate the first-order sensitivity contributions $S_m(t)$ and $S_b(t)$ to identify parameter dominance.",
+                "Save the processed sensitivity data and intermediate metrics for subsequent analysis."
+            ],
+            "sub_task": "Data preprocessing, signal validation, and computation of the analytical Jacobian and sensitivity indices.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Identify the Information Horizon $T_H$ where the sensitivity ratio $R(t) = S_b(t) / S_m(t)$ crosses unity.",
+                "Generate a summary table of the calculated Information Horizon $T_H$ and peak sensitivity values for all 20 oscillators.",
+                "Sort oscillators by damping ratio and compute mean sensitivity profiles for the four defined quartiles.",
+                "Generate a heatmap of the Sensitivity Index $S(t)$ across the time domain for all oscillators.",
+                "Plot the evolution of $S_m(t)$ and $S_b(t)$ and overlay the Information Horizon $T_H$.",
+                "Perform linear regression of $T_H$ against the damping ratio and calculate the correlation between peak sensitivity and damping."
+            ],
+            "sub_task": "Population-level analysis, Information Horizon identification, and visualization.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity manifold and the identified Information Horizon $T_H$ in the context of physical parameter identifiability.",
+                "Cross-reference the statistical findings (regression coefficients and correlation values) with the visual trends observed in the heatmap and sensitivity plots generated in Step 2.",
+                "Discuss the relationship between damping regimes and the reliability of energy dissipation models.",
+                "Synthesize the statistical findings into a comprehensive report on the limits of energy conservation models in underdamped systems, ensuring a cohesive narrative between quantitative data and qualitative physical interpretation.",
+                "Provide final conclusions on the robustness of parameter estimation based on the sensitivity matrix and regression analysis."
+            ],
+            "sub_task": "Synthesis of results and final robustness assessment report.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
