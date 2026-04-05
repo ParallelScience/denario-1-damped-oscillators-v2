@@ -1,0 +1,36 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Calculate the rolling window standard deviation of `total_energy` residuals to establish the noise floor $\\sigma_{noise}(t)$ for each oscillator.",
+                "Implement a vectorized function for the Jacobian $\\mathbf{J}(t) = [\\frac{\\partial E}{\\partial m}, \\frac{\\partial E}{\\partial b}]^T$ based on the energy model.",
+                "Perform a binary search over the time domain to identify the predictive horizon $T_d$ for a grid of perturbations $\\delta_m, \\delta_b \\in [-0.1, 0.1]$.",
+                "Save the computed $T_d$ values, the noise floor $\\sigma_{noise}(t)$, and the Jacobian $\\mathbf{J}(t)$ as intermediate data files for subsequent analysis."
+            ],
+            "sub_task": "Perform noise floor characterization, analytical Jacobian derivation, and compute Time-to-Divergence ($T_d$) for the oscillator population.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Define the \"Sensitivity Ellipse\" and calculate theoretical bounds $\\Delta m_{max}$ and $\\Delta b_{max}$ for each oscillator.",
+                "Perform a forward simulation to verify that residuals remain within $\\sigma_{noise}(t)$ for the duration of the experiment.",
+                "Correlate $T_d$ and Tolerance Budgets with the `damping_ratio` using linear regression.",
+                "Generate a summary statistics table (mean and standard deviation of $T_d$ and tolerance budgets per damping regime) and save it as a CSV file.",
+                "Generate a scatter plot of $T_d$ versus $\\zeta$ with overlaid theoretical sensitivity curves and save as a high-resolution PNG."
+            ],
+            "sub_task": "Map tolerance budgets, perform sensitivity horizon analysis, generate summary statistics, and create visualizations.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Interpret the relationship between damping regimes and predictive horizon decay based on the generated statistics and plots.",
+                "Incorporate the summary statistics table generated in Step 2 into the final report to support qualitative discussions with aggregated quantitative findings.",
+                "Discuss the implications of the sensitivity matrix on the reliability of long-term state prediction in underdamped systems.",
+                "Summarize the findings regarding the precision required for physical parameter estimation.",
+                "Compile the final Results section of the paper, referencing all quantitative findings and visual evidence."
+            ],
+            "sub_task": "Synthesize results and write the final research report.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
