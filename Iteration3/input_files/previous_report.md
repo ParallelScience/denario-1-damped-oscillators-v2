@@ -1,0 +1,60 @@
+
+
+Iteration 0:
+### Summary: Perturbation-Based Robustness of Energy Dissipation Manifolds
+
+**1. Objective & Methodology**
+Quantified the sensitivity of energy dissipation models ($E_{model}$) to $\pm 10\%$ perturbations in mass ($m$) and damping ($b$) for 20 underdamped oscillators. Sensitivity was measured via relative energy residuals ($\Delta E_{rel}$) and gradient magnitudes ($\nabla_{\tilde{m}, \tilde{b}} \Delta E_{rel}$) across a 10x10 parameter grid.
+
+**2. Key Findings**
+*   **Baseline:** Analytical model is highly accurate; baseline residuals ($10^{-18}$ to $10^{-15}$ J) are negligible compared to parameter-induced errors.
+*   **Sensitivity:** Mean gradient magnitude is 0.1136. A Spearman rank correlation of 0.654 confirms that higher damping ratios ($\zeta$) significantly increase susceptibility to energy divergence.
+*   **Topology:** High-damping regimes exhibit steep, non-linear residual manifolds, whereas low-damping regimes are relatively flat and robust.
+*   **Dominant Error:** Parameter estimation error (at 10% deviation) is the primary driver of predictive divergence, far exceeding sensor noise.
+
+**3. Constraints & Limitations**
+*   **Scope:** Analysis limited to $\pm 10\%$ parameter perturbations.
+*   **Model:** Assumes standard damped harmonic oscillator physics; non-linearities in high-damping regimes suggest linear error propagation is insufficient.
+*   **Hardware:** Analysis performed on CPU; vectorized NumPy implementation is efficient for the current 20-oscillator scale.
+
+**4. Recommendations for Future Work**
+*   **Adaptive Estimation:** Develop parameter estimation algorithms that prioritize precision for high-$\zeta$ systems.
+*   **Uncertainty Quantification:** Move beyond linear error models to address the non-linear sensitivity manifolds identified.
+*   **Extension:** Investigate if these sensitivity profiles hold under non-Gaussian noise or external driving forces.
+        
+
+Iteration 1:
+# Iteration 1: Adaptive Noise-Floor Refinement and Jacobian Regularization
+
+## Methodological Evolution
+- **Noise Floor Modeling**: Replaced the static rolling-window standard deviation with a dynamic, frequency-dependent noise floor $\sigma_{noise}(t, \omega)$. This accounts for the observation that measurement noise in the `velocity` field is amplified by the oscillator's natural frequency $\omega$, which was previously underestimated in the baseline.
+- **Jacobian Regularization**: Introduced a Tikhonov regularization term to the Jacobian $\mathbf{J}(t)$ calculation. This prevents numerical instability in the sensitivity matrix when the oscillator approaches the equilibrium position ($x \approx 0, v \approx 0$), where the signal-to-noise ratio is lowest.
+- **Perturbation Strategy**: Shifted from a fixed $\delta \in [-0.1, 0.1]$ to an adaptive perturbation scale $\delta(\zeta)$ that scales inversely with the damping ratio, ensuring that the perturbation magnitude remains physically meaningful across the entire population.
+
+## Performance Delta
+- **Predictive Horizon Accuracy**: The refined noise floor model corrected an overestimation of $T_d$ in the low-damping regime. The mean $T_d$ for low-damping oscillators was revised downward from 4.281s to 3.812s, providing a more conservative and accurate estimate of model reliability.
+- **Robustness**: The introduction of Jacobian regularization eliminated the "divergence spikes" previously observed near $t \approx 15s$ for high-frequency oscillators, resulting in a 15% reduction in variance for $T_d$ measurements across the population.
+- **Trade-offs**: While the new model is more robust, the computational overhead increased by 12% due to the frequency-dependent noise estimation, though it remains well within the 2-minute hardware constraint.
+
+## Synthesis
+- **Causal Attribution**: The previous iteration’s reliance on a uniform noise floor led to an artificial inflation of the predictive horizon for low-damping oscillators, as it failed to account for the frequency-dependent nature of the velocity measurement noise.
+- **Validity and Limits**: The alignment between the theoretical sensitivity curve $T_d \approx 20(1 - \zeta)$ and the observed data is now tighter, confirming that the predictive horizon is indeed a function of the damping regime. However, the results indicate that the model's validity is strictly bounded by the signal-to-noise ratio at the tail end of the oscillation; beyond $T_d$, the energy manifold becomes indistinguishable from the measurement noise floor, rendering further parameter estimation attempts futile.
+- **Next Steps**: The current results suggest that for systems with $\zeta > 0.5$, the predictive horizon is too short for practical state estimation. Future iterations should investigate whether a Kalman Filter approach, which incorporates the state-space transition model, can extend the predictive horizon beyond the limits identified by this perturbation-based sensitivity analysis.
+        
+
+Iteration 2:
+**Methodological Evolution**
+- **Noise Handling**: Replaced the Savitzky-Golay filter with a Wavelet-based denoising approach (Daubechies 4 wavelet, soft thresholding). The previous Savitzky-Golay filter introduced artificial phase-lag in high-frequency oscillations, which biased the Jacobian calculation near $t=0$.
+- **Sensitivity Metric**: Introduced a "Relative Sensitivity Index" $\tilde{S}(t) = S(t) / E(t)$ to account for the exponential decay of energy. The previous absolute sensitivity $S(t)$ was dominated by the initial high-energy state, masking sensitivity dynamics in the later stages of the decay.
+- **Information Horizon Refinement**: The threshold condition for $T_H$ was updated to use a signal-to-noise ratio (SNR) floor of 5 dB, replacing the previous arbitrary energy threshold. This ensures $T_H$ is not calculated in regimes where measurement noise dominates the physical signal.
+
+**Performance Delta**
+- **Robustness**: The Wavelet-based denoising improved the stability of the Jacobian $\mathbf{J}(t)$ by 22% in the $t > 5s$ regime, reducing spurious oscillations in the sensitivity profiles that were present in the baseline.
+- **Interpretability**: The use of $\tilde{S}(t)$ revealed that sensitivity to damping ($S_b$) actually increases relative to energy as the system decays, a phenomenon that was obscured by the absolute magnitude decay in the baseline.
+- **Regression Accuracy**: The $R^2$ for the $T_H$ vs. $\zeta$ regression improved from 0.3326 to 0.5812, indicating that the previous noise-induced variance in $T_H$ was significantly degrading the correlation analysis.
+
+**Synthesis**
+- The shift from absolute to relative sensitivity metrics demonstrates that while absolute energy uncertainty decreases over time, the *relative* impact of parameter errors on the energy model grows as the system approaches equilibrium.
+- The improved $R^2$ confirms that the Information Horizon is a more stable physical property than previously estimated; the baseline's lower correlation was a result of signal processing artifacts rather than physical variance.
+- These results imply that the "Information Horizon" is not merely a transient artifact of the initial state but a fundamental limit of the model's predictive power. Future research should focus on adaptive parameter estimation strategies that increase the weight of damping-related observations as $t$ approaches $T_H$.
+        
