@@ -1,0 +1,20 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+
+
+This paper addressed the challenge of time-dependent parameter identifiability in damped harmonic oscillators, where the influence of parameters such as mass and damping on system dynamics evolves over time. Our objective was to quantify the temporal limits within which these parameters can be reliably estimated from the system's energy trajectory. To achieve this, we employed a Jacobian-based sensitivity analysis on a simulated dataset of 20 underdamped harmonic oscillators. We computed the partial derivatives of the total mechanical energy with respect to mass and the damping coefficient at each time step, allowing us to track the evolving contribution of each parameter to the model's uncertainty.
+
+Our results demonstrate that the sensitivity of the system's energy to its parameters is highest during the initial transient phase and decays exponentially thereafter. We identified a distinct and rapid transition in which the dominant source of energy uncertainty shifts from the mass to the damping coefficient. We defined this crossover point as the ``Information Horizon'', which occurred at a mean time of 0.76 seconds across the population. This finding establishes a clear temporal boundary beyond which the system's energy contains more information about dissipative processes than its inertial properties.
+
+From these results, we have learned that a fundamental relationship exists between a system's damping characteristics and its parameter identifiability. Specifically, we found that higher damping ratios lead to an earlier Information Horizon and lower peak sensitivity. This reveals a critical trade-off: systems with low damping provide a longer temporal window for reliable mass identification but are more susceptible to parameter errors during this period. Conversely, highly damped systems are less sensitive to parameter perturbations but offer a much more constrained time frame for estimating mass. Ultimately, this work provides a quantitative framework for understanding the operational limits of model-based analysis in dissipative systems and offers a practical guideline for designing more effective system identification experiments.
+
+\end{document}
+                

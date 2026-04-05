@@ -1,0 +1,60 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+The sensitivity of the total mechanical energy to perturbations in mass and damping was evaluated over time for the population of 20 simulated oscillators. Our analysis reveals a distinct temporal evolution in parameter influence, culminating in a rapid transition that defines the limits of parameter identifiability.
+
+\subsection{Temporal evolution of energy sensitivity}
+The overall sensitivity of the energy manifold to parameter perturbations was quantified using the sensitivity index $S(t)$, as defined in Equation \ref{eq:sensitivity_index}. Figure \ref{fig:sensitivity_heatmap} displays a heatmap of $S(t)$ for all 20 oscillators over the 20-second simulation period. The results consistently show that sensitivity is highest during the initial transient phase of the oscillation, typically within the first two seconds. Following this peak, the sensitivity index decays exponentially, mirroring the dissipation of mechanical energy in the system. This indicates that the energy manifold is most susceptible to parameter uncertainties at the beginning of the system's evolution, when kinetic and potential energies are at their maximum.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{../input_files/plots/step_2_sensitivity_heatmap_1739965000.png}
+    \caption{Temporal evolution of the sensitivity index, S(t), for 20 distinct underdamped oscillators over a 20-second interval. The color intensity corresponds to the sensitivity of the total energy model to perturbations in mass and damping parameters. The plot reveals that sensitivity is highest during the initial transient phase (t < 2s) and subsequently decays, demonstrating that the energy manifold is most susceptible to parameter estimation errors shortly after the initial state.}
+    \label{fig:sensitivity_heatmap}
+\end{figure}
+
+\subsection{The information horizon and the shift in parameter dominance}
+To understand the sources of this time-varying sensitivity, we decomposed the sensitivity index into its partial contributions from mass, $S_m(t)$, and the damping coefficient, $S_b(t)$. The temporal evolution of these partial sensitivities, shown in Figure \ref{fig:sensitivity_evolution}, reveals a clear and consistent pattern across all simulated oscillators. The sensitivity to mass, $S_m(t)$, dominates during the initial phase, driven by the large contribution of the kinetic energy term ($\frac{1}{2}mv^2$) to the total energy. As the system evolves and energy dissipates, the sensitivity to the damping coefficient, $S_b(t)$, which governs the rate of energy decay, grows in relative importance and eventually surpasses the sensitivity to mass.
+
+This transition marks a fundamental shift in the information content of the system's energy trajectory. We define the point of this transition as the ``Information Horizon'', $T_H$, which occurs when the sensitivity ratio $R(t) = S_b(t)/S_m(t)$ crosses unity (see Equation \ref{eq:ratio}). Beyond this horizon, the system's energy provides more information about dissipative processes than about its inertial properties. Across the population of oscillators, the Information Horizon occurred at a mean time of $0.76$ seconds, with all instances occurring between 0.60 s and 0.92 s. This demonstrates that the shift in parameter dominance is a rapid phenomenon that happens early in the system's evolution.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{../input_files/plots/step_2_sensitivity_evolution_1739965000.png}
+    \caption{Temporal evolution of the partial sensitivities of total energy with respect to mass ($S_m$, blue) and the damping coefficient ($S_b$, red) for 20 distinct underdamped oscillators. The plot illustrates a rapid regime shift where the initial dominance of mass-related sensitivity ($S_m$) transitions to a dominance by damping-related sensitivity ($S_b$). This crossover, defining the Information Horizon ($T_H$), consistently occurs early in the transient phase (t < 1s), indicating that the energy model's uncertainty is primarily governed by the damping parameter for the majority of the system's evolution.}
+    \label{fig:sensitivity_evolution}
+\end{figure}
+
+\subsection{Relationship between damping ratio and sensitivity dynamics}
+To investigate the factors governing these sensitivity dynamics, we analyzed the relationship between the system's damping ratio, $\zeta$, and two key metrics: the timing of the Information Horizon, $T_H$, and the peak sensitivity observed during the transient phase, $S_{max}$. The results of this statistical analysis are summarized in Table \ref{tab:stats_summary}.
+
+\begin{table}[h!]
+\centering
+\caption{Statistical summary of the relationship between the damping ratio ($\zeta$) and key sensitivity metrics across the population of 20 oscillators.}
+\label{tab:stats_summary}
+\begin{tabular}{lc}
+\hline
+\hline
+Metric & Value \\
+\hline
+Mean Information Horizon ($T_H$) & 0.76 s \\
+Slope ($T_H$ vs. $\zeta$) & -0.8347 \\
+$R^2$ (Regression of $T_H$ on $\zeta$) & 0.3326 \\
+Correlation ($\rho$) of $S_{max}$ vs. $\zeta$ & -0.5221 \\
+\hline
+\end{tabular}
+\end{table}
+
+A linear regression analysis reveals a negative relationship between the Information Horizon and the damping ratio, with a slope of -0.8347. This indicates that systems with higher damping ratios experience an earlier transition to damping-dominated sensitivity. In other words, a higher $\zeta$ shortens the temporal window in which mass can be reliably identified from the energy trajectory. The coefficient of determination ($R^2 = 0.3326$) suggests that the damping ratio explains a moderate portion of the variance in the timing of $T_H$.
+
+Furthermore, we found a moderate negative Pearson correlation ($\rho = -0.5221$) between the peak sensitivity, $S_{max}$, and the damping ratio. This implies that oscillators with lower damping are more sensitive to parameter perturbations during their initial, high-energy phase. While these low-damping systems offer a longer window for mass identification before the Information Horizon, their energy manifolds are inherently more susceptible to errors in parameter estimation during this critical period. Conversely, high-damping systems are less sensitive overall but offer a more constrained window for identifying inertial properties.
+
+\end{document}
+                

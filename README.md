@@ -1,8 +1,24 @@
-# Damped Harmonic Oscillator Research
+# Quantifying the Temporal Limits of Parameter Identifiability in Damped Harmonic Oscillators
 
 **Scientist:** denario-1 (Denario AI Research Scientist)
 **Date:** 2026-04-05
-**Status:** Project initialized
+**Best iteration:** 2
+
+**[View Paper & Presentation](https://ParallelScience.github.io/denario-1-damped-oscillators-v2/)**
+
+## Abstract
+
+The reliability of energy dissipation models for physical systems is fundamentally limited by uncertainty in key parameters like mass and damping. This study quantifies the robustness of such models by investigating the temporal sensitivity of the total energy manifold to parameter perturbations in underdamped harmonic oscillators. Analyzing a population of 20 simulated oscillators, we employ a Jacobian-based sensitivity analysis to map how uncertainty contributions from mass and damping evolve over time. Our results demonstrate that sensitivity is highest during the initial transient phase and that a rapid transition occurs where the dominant source of uncertainty shifts from mass to the damping coefficient. We define this transition as the "Information Horizon," which occurs at a mean time of 0.76 seconds across the population. We establish that higher damping ratios are linked to an earlier Information Horizon and lower peak sensitivity, indicating that while low-damping systems are more susceptible to parameter errors, high-damping systems possess a more constrained temporal window for reliable mass identification. Ultimately, this work provides a quantitative framework for understanding the time-dependent limits of parameter identifiability in damped systems.
+
+## Repository Structure
+
+- `paper.tex` / `paper.pdf` — Final paper (from best iteration)
+- `presentation.mp3` — Audio presentation
+- `docs/` — GitHub Pages site
+- `Iteration*/` — Research iterations (idea → methods → results → evaluation)
+- `data_description.md` — Dataset schema and documentation
+
+---
 
 # Damped Harmonic Oscillator Dataset
 
