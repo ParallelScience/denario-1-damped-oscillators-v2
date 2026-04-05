@@ -1,0 +1,8 @@
+{
+  "primary_category": "physics.class-ph",
+  "secondary_categories": [
+    "physics.comp-ph",
+    "physics.data-an"
+  ],
+  "justification": "The paper focuses on the dynamics of damped harmonic oscillators, which is a core topic in classical mechanics. The use of Jacobian-based sensitivity analysis and computational simulation justifies the inclusion of computational physics and data analysis categories."
+}

@@ -1,0 +1,44 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+\subsection{Dataset and system model}
+Our analysis was performed on a simulated dataset comprising 20 underdamped harmonic oscillators. Each oscillator was defined by a unique set of physical parameters: mass ($m$), stiffness ($k$), and damping coefficient ($b$). The state of each system, described by its time-dependent position $x(t)$ and velocity $v(t)$, was simulated over a 20-second window. The central quantity of interest is the total mechanical energy of the system, $E(t)$, which is governed by the equation:
+\begin{equation}
+E(t) = \frac{1}{2} m v(t)^2 + \frac{1}{2} k x(t)^2
+\label{eq:energy}
+\end{equation}
+The damping ratio, $\zeta$, was calculated for each oscillator to characterize its damping regime.
+
+\subsection{Jacobian-based sensitivity analysis}
+To quantify the temporal sensitivity of the system's energy to its parameters, we employed a Jacobian-based analysis. This method allows for a direct, time-resolved measurement of how perturbations in model parameters influence the energy manifold. For each oscillator at each time step, we computed the Jacobian vector of the energy function with respect to the mass and damping coefficient:
+\begin{equation}
+\mathbf{J}(t) = \left[ \frac{\partial E}{\partial m}, \frac{\partial E}{\partial b} \right]^T
+\label{eq:jacobian}
+\end{equation}
+The overall sensitivity of the energy manifold at time $t$ was quantified using the Euclidean norm of this vector, defined as the sensitivity index $S(t)$:
+\begin{equation}
+S(t) = \| \mathbf{J}(t) \|_2
+\label{eq:sensitivity_index}
+\end{equation}
+The individual contributions of mass and damping to the total sensitivity were defined as the partial sensitivities, $S_m(t) = |\frac{\partial E}{\partial m}|$ and $S_b(t) = |\frac{\partial E}{\partial b}|$, respectively. These partial sensitivities allow us to track the evolving dominance of each parameter's influence on the energy uncertainty over time.
+
+\subsection{Quantifying the information horizon}
+A primary objective of this study was to identify the temporal point at which the dominant source of energy uncertainty transitions from mass to damping. To this end, we calculated the time-varying sensitivity ratio, $R(t)$, given by:
+\begin{equation}
+R(t) = \frac{S_b(t)}{S_m(t)}
+\label{eq:ratio}
+\end{equation}
+We define the ``Information Horizon'', $T_H$, as the specific time at which this ratio crosses unity, i.e., when $R(T_H) = 1$. This point marks the transition where the system's energy becomes more sensitive to the damping coefficient than to its mass, representing a fundamental limit for the reliable identification of mass from the energy trajectory.
+
+\subsection{Evaluation metrics and statistical analysis}
+To investigate the relationship between system properties and sensitivity dynamics, we performed two key statistical analyses across the population of 20 oscillators. First, we performed a linear regression to model the relationship between the Information Horizon ($T_H$) and the system's damping ratio ($\zeta$). The slope and coefficient of determination ($R^2$) were calculated to quantify the strength and direction of this trend. Second, we examined the link between the peak sensitivity observed during the transient phase, $S_{max} = \max(S(t))$, and the damping ratio. The Pearson correlation coefficient ($\rho$) was computed to assess the association between these two variables.
+
+\end{document}
+                
