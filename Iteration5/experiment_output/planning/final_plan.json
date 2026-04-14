@@ -1,0 +1,41 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and group by oscillator ID.",
+                "Compute observed energy and establish the theoretical energy model.",
+                "Derive logarithmic sensitivities for mass and damping coefficient.",
+                "Perform a 21x21 grid search for mass and damping perturbations (ranging from -10% to +10%) for all 20 oscillators simultaneously using NumPy broadcasting to ensure computational efficiency.",
+                "Calculate energy residuals and the time-to-divergence metric ($t_{limit}$) where residuals exceed 5% of initial energy.",
+                "Save the resulting sensitivity matrix, residual data, and $t_{limit}$ metrics as a single compressed `.npz` file to minimize I/O overhead."
+            ],
+            "sub_task": "Data processing, sensitivity derivation, and grid search computation",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Load the processed data from Step 1.",
+                "Compute the Hessian of the energy residual surface using numerical finite differences.",
+                "Generate a heatmap of $t_{limit}$ against the damping ratio.",
+                "Generate a 3D surface plot or contour plot of the energy residual surface to identify the \"valley of degeneracy,\" ensuring axes are clearly labeled with perturbation percentages of mass and damping.",
+                "Print a summary table of calculated $t_{limit}$ values for a subset of oscillators (min, median, and max damping ratios) to provide quantitative benchmarks.",
+                "Save all plots as high-resolution PNG files."
+            ],
+            "sub_task": "Manifold curvature analysis and visualization",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity gradients and the \"valley of degeneracy\" observed in the residual surface.",
+                "Explicitly correlate the \"valley of degeneracy\" with the theoretical damping ratio $\\zeta$, discussing how the coupling between mass and damping coefficient evolves as the system approaches critical damping.",
+                "Discuss the relationship between damping ratios and model reliability based on the $t_{limit}$ heatmap.",
+                "Synthesize the findings into a formal Results section, referencing the generated plots and key statistics.",
+                "Provide a final assessment of how physical parameter precision impacts long-term state prediction in underdamped systems."
+            ],
+            "sub_task": "Synthesis of results and report writing",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
