@@ -1,0 +1,38 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and estimate noise variances ($\\\\sigma_x^2, \\\\sigma_v^2$) using the Median Absolute Deviation (MAD) of high-frequency signal components to ensure robustness against outliers.",
+                "Compute the instantaneous observed energy and define the analytical Jacobian of the energy model with respect to mass ($m$) and damping coefficient ($b$).",
+                "Construct the Fisher Information Matrix (FIM) and compute the Cramer-Rao Lower Bound (CRLB) for each oscillator over time.",
+                "Perform sliding-window Maximum Likelihood Estimation (MLE) to estimate parameters $\\\\hat{m}$ and $\\\\hat{b}$ and their empirical variances.",
+                "Save all computed metrics (CRLB, MLE estimates, variances, sensitivity profiles) to a `.npz` file and generate a summary statistics JSON file containing the mean and standard deviation of the estimated parameters for each oscillator."
+            ],
+            "sub_task": "Data Processing, Noise Characterization, and FIM Computation",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Load the processed data and summary statistics from Step 1.",
+                "Group oscillators into quartiles based on their damping ratio ($\\\\zeta$).",
+                "Calculate the Information Horizon ($T_H$) for each oscillator and compute the Pearson correlation coefficient between $\\\\zeta$ and $T_H$.",
+                "Generate a multi-panel figure showing the evolution of CRLB, empirical variance, and sensitivity profiles across the time domain, highlighting the transition to identifiability.",
+                "Save the resulting plots as high-resolution PNG files and print the calculated correlation coefficient to the console."
+            ],
+            "sub_task": "Visualization, Regime-Specific Analysis, and Statistical Correlation",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Interpret the relationship between the damping ratio and the time-to-convergence ($T_H$) using the correlation coefficient provided by the engineer.",
+                "Explicitly compare the empirical variance obtained from the sliding-window MLE against the theoretical CRLB, identifying specific regimes where the estimator fails to reach the theoretical efficiency limit.",
+                "Discuss the validity of the energy dissipation manifold under parametric uncertainty.",
+                "Synthesize all findings into a formal Results section, summarizing the reliability of parameter estimation in underdamped systems based on the generated plots and statistics."
+            ],
+            "sub_task": "Results Synthesis and Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
