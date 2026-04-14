@@ -2,7 +2,7 @@
   {
     "name": "plan_comparator",
     "content": "",
-    "timestamp": "2026-04-14 17:08:03",
+    "timestamp": "2026-04-14 17:10:06",
     "cost": {
       "Agent": [
         "plan_comparator"
@@ -11,23 +11,23 @@
         "gemini-3.1-flash-lite-preview"
       ],
       "Cost": [
-        0.00063975
+        0.00059975
       ],
       "Prompt Tokens": [
-        1833
+        1727
       ],
       "Completion Tokens": [
-        121
+        112
       ],
       "Total Tokens": [
-        1954
+        1839
       ]
     }
   },
   {
     "name": "_Group_Tool_Executor",
-    "content": "Plan comparator decision recorded: reuse=False, restart_at_step=1. The new plan introduces significant changes to the methodology, specifically shifting from a sensitivity-based approach (Jacobian/Sensitivity Index) to a statistical estimation approach (Fisher Information Matrix, Cramer-Rao Lower Bound, and Maximum Likelihood Estimation). Because the core computational tasks and the metrics being derived have changed fundamentally, the previous execution results are not directly applicable to the new plan's requirements. Therefore, the process must restart from the beginning.",
-    "timestamp": "2026-04-14 17:08:03",
+    "content": "Plan comparator decision recorded: reuse=False, restart_at_step=1. The new plan fundamentally changes the methodology for parameter estimation and sensitivity analysis. Step 1 of the new plan replaces the MLE/CRLB approach with non-linear least squares and perturbation-based sensitivity analysis. Step 2 and 3 are also significantly altered to reflect these new metrics. Therefore, no steps from the old plan can be reused as the underlying data processing and analysis logic are different.",
+    "timestamp": "2026-04-14 17:10:06",
     "cost": {
       "Agent": [],
       "Model": [],
@@ -40,7 +40,7 @@
   {
     "name": "terminator",
     "content": "TERMINATE",
-    "timestamp": "2026-04-14 17:08:03",
+    "timestamp": "2026-04-14 17:10:06",
     "cost": {
       "Agent": [],
       "Model": [],

@@ -1,0 +1,38 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and perform noise characterization by calculating the variance of residuals between observed and theoretical displacement.",
+                "Implement the non-linear least squares estimation for each oscillator to determine (gamma, omega, A, phi) and compute the parameter covariance matrix using the analytical Jacobian.",
+                "Define and compute the theoretical energy dissipation model E_model(m_tilde, b_tilde, t) as a prerequisite for residual analysis.",
+                "Perform the perturbation-based sensitivity analysis by varying m and b by +/- 10% and calculating the energy residuals Delta E(t) = |E_obs(t) - E_model(m_tilde, b_tilde, t)| across the population.",
+                "Compute the Fisher Information Rate I(t) and the Logarithmic Sensitivity matrix S for the population.",
+                "Save all computed metrics (residuals, sensitivity matrix, Fisher information) to a single .npz file for subsequent visualization."
+            ],
+            "sub_task": "Data Processing, Parameter Estimation, and Sensitivity Analysis",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Load the computed metrics from the .npz file generated in Step 1.",
+                "Calculate and print to the console a summary table of key statistics, including the mean and standard deviation of sensitivity across different damping ratio regimes.",
+                "Generate a multi-panel figure visualizing the sensitivity heatmap (damping ratio vs. time vs. energy residual) and the Fisher Information decay over time.",
+                "Save the resulting plots as high-resolution PNG files."
+            ],
+            "sub_task": "Visualization, Statistical Summary, and Reliability Mapping",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity profiles and the Fisher Information Rate to identify regimes of high susceptibility to energy divergence.",
+                "Discuss the relationship between damping ratios and the reliability of long-term state predictions based on the generated sensitivity matrix.",
+                "Explicitly reference the specific oscillator IDs and damping ratio clusters identified in the engineer's summary table from Step 2 to ground the analysis in empirical findings.",
+                "Write the full Results section of the report, synthesizing the quantitative findings and qualitative interpretations of the analysis."
+            ],
+            "sub_task": "Results Synthesis and Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
