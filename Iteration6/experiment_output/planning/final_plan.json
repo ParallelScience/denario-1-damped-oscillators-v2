@@ -1,0 +1,40 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the dataset and compute global noise variances for displacement and velocity.",
+                "Define the time-dependent energy noise floor based on error propagation.",
+                "Perform a vectorized 21x21 grid search for mass and damping coefficient perturbations (±10%) across all 20 oscillators.",
+                "Compute relative energy residuals and the Jacobian matrix for energy with respect to mass and damping.",
+                "Calculate the analytical gradients of the phase $\\phi$ with respect to $m$ and $b$.",
+                "Calculate the condition number of the Jacobian and identify the critical time index where residuals exceed the noise floor.",
+                "Save all computed metrics (residuals, condition numbers, critical times, and phase sensitivity metrics) to a single NumPy file for subsequent analysis."
+            ],
+            "sub_task": "Data Preprocessing, Noise Estimation, and Parameter Perturbation Analysis",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Load the computed metrics from Step 1.",
+                "Generate heatmaps of the condition number and relative residuals in the parameter space.",
+                "Create plots correlating the condition number and critical time with the damping ratio.",
+                "Generate a comparative plot between energy-based sensitivity and phase-based sensitivity to evaluate if phase analysis resolves parameter degeneracy.",
+                "Save all plots as high-resolution PNG files."
+            ],
+            "sub_task": "Visualization of Sensitivity and Robustness",
+            "sub_task_agent": "engineer",
+            "code_execution_timeout": 120
+        },
+        {
+            "bullet_points": [
+                "Interpret the sensitivity profiles and the relationship between damping ratios and energy divergence.",
+                "Discuss the implications of the condition number on parameter degeneracy in underdamped systems.",
+                "Discuss the comparative effectiveness of energy-based versus phase-based sensitivity in resolving parameter degeneracy, based on the plots generated in Step 2.",
+                "Synthesize the findings into a formal Results section, referencing the generated plots and statistical metrics to evaluate the robustness of the energy dissipation model."
+            ],
+            "sub_task": "Synthesis and Reporting of Robustness Analysis",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
