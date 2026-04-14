@@ -1,0 +1,9 @@
+**Title: Breaking Parameter Degeneracy via Phase-Space Velocity-Displacement Manifold Reconstruction**
+
+**Hypothesis:** The structural degeneracy observed in energy-based models (where $m$ and $b$ are coupled via $\gamma = b/2m$) arises from the loss of phase information inherent in the scalar energy transformation $E = KE + PE$. By shifting the objective function from energy residual minimization to a direct phase-space trajectory fitting in the $(x, v)$ domain, we can decouple the mass and damping coefficients. Specifically, we hypothesize that the time-derivative of the phase-space angle $\theta(t) = \arctan(v / (\omega x))$ provides a unique signature for the natural frequency $\omega$ and damping ratio $\gamma$ that is independent of the absolute energy scale.
+
+**Methodology:**
+1. **Phase-Space Mapping:** Transform the observed $(x, v)$ data into polar coordinates $(r, \theta)$ in phase space.
+2. **Decoupling Strategy:** Since $\dot{\theta} \approx \omega$ (for low damping) and the radial decay $\dot{r}/r \approx -\gamma$, we can estimate $\omega$ and $\gamma$ independently of $m$ and $b$ initially.
+3. **Inversion:** Once $\omega$ and $\gamma$ are identified, use the relationship $k = m\omega^2$ and $b = 2m\gamma$ to solve for $m$ and $b$ by minimizing the residual of the state-space equations $\dot{x} = v$ and $\dot{v} = -(k/m)x - (b/m)v$.
+4. **Validation:** Compare the parameter recovery accuracy of this phase-space approach against the Tikhonov-regularized energy model from Iteration 5. We expect this method to eliminate the "valley of degeneracy" without requiring informative priors, as the phase-space trajectory is geometrically distinct for different combinations of $m$ and $b$, unlike the scalar energy manifold.
